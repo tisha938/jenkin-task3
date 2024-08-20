@@ -30,7 +30,7 @@ pipeline{
         }
         stage('docker compose update'){
             steps{
-               sh 'sed -i 's|image: .*|image: ${DOCKER_IMAGE}|' docker-compose.yml'
+               sh "sed -i 's|image: .*|image: ${DOCKER_IMAGE}|' react-deploy/docker-compose.yml"
             }
         }
          stage('deploy'){
