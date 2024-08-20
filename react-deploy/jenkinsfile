@@ -17,10 +17,7 @@ pipeline{
         }
          stage('dockerhub login'){
             steps{
-               withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'password', usernameVariable: 'usr')]) 
-               {
-                   sh 'echo ${password} | docker login -u ${usr} -password-stdin'
-}
+               docker.withRegistry('https://registry.hub.docker.com',dockerhub)
             }
         }
          stage('docker image push to dockerhub'){
