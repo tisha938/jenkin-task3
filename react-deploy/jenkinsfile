@@ -18,13 +18,12 @@ pipeline{
          stage('dockerhub login'){
             steps{
                docker.withRegistry('https://registry.hub.docker.com',dockerhub)
-            }
-        }
-         stage('docker image push to dockerhub'){
-            steps{
+               {
                 sh 'docker push ${DOCKER_IMAGE}'
+               }
             }
         }
+         
         stage('docker compose update'){
             steps{
                sh "sed -i 's|image: .*|image: ${DOCKER_IMAGE}|' react-deploy/docker-compose.yml"
