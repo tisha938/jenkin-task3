@@ -32,8 +32,9 @@ pipeline{
         }
          stage('deploy'){
             steps{
-               sh  '''docker-compose down
-                    docker-compose up -d'''
+      dir('react-deploy/docker-compose.yml')
+             {  sh  '''docker-compose down
+                    docker-compose up -d'''}
             }
         }
     }
