@@ -20,6 +20,7 @@ locals {
       public_instance_type  = "t2.micro"
       private_instance_ami  = "ami-0ad21ae1d0696ad58"
       private_instance_type = "t2.medium"
+      my_domains=["jenkins.tisha.in.net","app.tisha.in.net"]
     }
   }
 

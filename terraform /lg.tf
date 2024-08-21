@@ -26,3 +26,17 @@ resource "aws_lb_listener" "forward_tg" {
     target_group_arn = aws_lb_target_group.my_target_group_1.arn
   }
 }
+resource "aws_lb_listener_rule" "app-rule" {
+  listener_arn = aws_lb_listener.forward_tg.arn
+  priority     = 1
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.my_target_group_2.arn
+  }
+  condition {
+    host_header {
+      values = [local.Environment.my_domains[1]]
+    }
+  }
+  # depends_on = [aws_lb_listener.forward_to_target_group, aws_lb_target_group.target_to_app]
+}
