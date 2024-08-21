@@ -55,6 +55,13 @@ resource "aws_security_group" "my_private_sg" {
     to_port         = 8080
     security_groups = [aws_security_group.my_alb_sg.id]
   }
+  ingress {
+    //for app
+    protocol        = "tcp"
+    from_port       = 1000
+    to_port         = 1000
+    security_groups = [aws_security_group.my_alb_sg.id]
+  }
   
   egress {
     protocol    = "-1"
