@@ -1,0 +1,20 @@
+---
+- name:  Deploy React app using Docker compose
+  hosts: servers
+  become: yes
+  vars:
+    img: "nginx:latest"
+    healthcheck_interval: 10
+    healthcheck_retries: 3
+    healthcheck_start_period: 5
+    healthcheck_timeout: 5
+  tasks:
+    - name: Render Docker compose files from template
+      template:
+        src: docker-compose.yml.j2
+        dest: /home/ubuntu/docker-compose.yml
+    - name: Run Docker compose
+      docker_compose:
+        project_src: /home/ubuntu
+        state: present
+   

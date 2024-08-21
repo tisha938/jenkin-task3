@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+   image: "{{img}}"
+   ports:
+     -"51:80"
+   healthcheck:
+    test: ["CMD","curl","-f","http://localhost"]
+    interval: {{ healthcheck_interval }}s
+    retries:  {{ healthcheck_retries }}
+    start_period: {{ healthcheck_start_period }}s
+    timeout: {{ healthcheck_timeout }}s
